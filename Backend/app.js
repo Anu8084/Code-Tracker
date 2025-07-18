@@ -20,6 +20,10 @@ app.use('/api/profile', profileRoutes); // Profile Routes (Save, Fetch Profiles)
 
 // Port Setup
 const PORT = process.env.PORT || 5000;
+app.get('/api/test', (req, res) => {
+    res.status(200).json({ message: 'Backend deployed successfully 🎉' });
+});
+
 
 // Start the server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
