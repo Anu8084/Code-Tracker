@@ -12,7 +12,7 @@ const CodeforcesContest = () => {
   useEffect(() => {
     const fetchContests = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/profile/codeforces/contests');
+        const response = await fetch('https://code-tracker-1-fo9j.onrender.com/api/profile/codeforces/contests');
         if (!response.ok) {
           throw new Error('Failed to fetch contests');
         }

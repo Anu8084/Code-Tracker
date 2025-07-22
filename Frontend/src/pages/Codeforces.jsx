@@ -244,7 +244,7 @@ const Codeforces = () => {
 
       try {
         const { data } = await axios.get(
-          'http://localhost:5000/api/profile/codeforces',
+          'https://code-tracker-1-fo9j.onrender.com/api/profile/codeforces',
           { params: { email } }
         );
         console.log("Raw CF response:", data);

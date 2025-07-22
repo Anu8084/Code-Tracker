@@ -93,7 +93,7 @@ const Leetcode = () => {
 
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/profile/leetcode?email=${email}`);
+        const res = await axios.get(`https://code-tracker-1-fo9j.onrender.com/api/profile/leetcode?email=${email}`);
         setData(res.data.leetcode);
       } catch (err) {
         console.error('LeetCode Error:', err);

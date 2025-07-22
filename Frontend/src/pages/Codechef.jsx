@@ -146,7 +146,7 @@ const Codechef = () => {
     const fetchData = async () => {
       try {
         const res = await axios.get(
-          'http://localhost:5000/api/profile/codechef',
+          'https://code-tracker-1-fo9j.onrender.com/api/profile/codechef',
           { params: { email } }
         );
         if (res.data?.codechef) {

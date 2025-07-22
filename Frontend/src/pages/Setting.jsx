@@ -14,7 +14,7 @@ const Profile = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post('http://localhost:5000/api/profile', {
+      const res = await axios.post('https://code-tracker-1-fo9j.onrender.com/api/profile', {
         email,
         codeforces,
         codechef,
