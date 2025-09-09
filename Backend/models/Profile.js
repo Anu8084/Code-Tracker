@@ -25,7 +25,8 @@
 const mongoose = require('mongoose');
 
 const profileSchema = new mongoose.Schema({
-  email: {
+  email: 
+  {
     type: String,
     required: true,
     unique: true,
@@ -36,3 +37,4 @@ const profileSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('Profile', profileSchema);
+

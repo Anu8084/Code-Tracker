@@ -1,67 +1,4 @@
-// // 
-// const axios =require('axios');
-// const Profile = require('../models/Profile');
 
-// const saveProfile = async (req, res) => {
-//   const { email, codeforces, codechef, leetcode } = req.body;
-
-//   try {
-//     let profile = await Profile.findOne({ email });
-
-//     if (profile) {
-//       profile.codeforces = codeforces;
-//       profile.codechef = codechef;
-//       profile.leetcode = leetcode;
-//       await profile.save();
-//       console.log("Profile updated:", profile); 
-//       console.log("Profile updated:", profile); 
-//       return res.status(200).json({ message: 'Profile updated successfully', profile });
-//     }
-
-//     profile = new Profile({
-//       email,
-//       codeforces,
-//       codechef,
-//       leetcode,
-//     });
-
-//     await profile.save();
-//     res.status(201).json({ message: 'Profile created successfully', profile });
-//   } catch (err) {
-//     res.status(500).json({ message: 'Error saving profile', error: err.message });
-//   }
-// };
-// const fetchCodechefData = async (req, res) => {
-//   const { email } = req.query;
-//   console.log('Received email:', email);
-
-//   try {
-//     const profile = await Profile.findOne({ email });
-//     console.log('Profile fetched:', profile);
-    
-//     if (!profile || !profile.codechef) {
-//       return res.status(404).json({ message: 'CodeChef handle not found for this email' });
-//     }
-
-//     const username = profile.codechef;
-//     console.log(username);
-
-//     // Use your provided API
-//     // const response = await axios.get('https://codechef-api.vercel.app/handle/${username}');
-//     const response = await axios.get(`https://codechef-api.vercel.app/handle/${username}`);
-//     console.log("fetching it ");
-
-//     if (!response.data || response.data.status === 'error') {
-//       return res.status(404).json({ message: 'CodeChef user not found or API failed' });
-//     }
-
-//     res.status(200).json({ codechef: response.data });
-//   } catch (err) {
-//     res.status(500).json({ message: 'Error fetching CodeChef data', error: err.message });
-//   }
-// };
-
-// module.exports = { saveProfile,fetchCodechefData};
 
 
 
@@ -298,5 +235,6 @@ const getCodeforcesContests = async (req, res) => {
 
 
 module.exports = { saveProfile, fetchCodechefData,fetchLeetcodeData,fetchCodeforcesData,fetchCodechefContests,getCodeforcesContests };
+
 
 

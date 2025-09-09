@@ -1,6 +1,4 @@
 // 
-
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -19,39 +17,36 @@ const LoginPage = () => {
     }
 
     try {
-      const res = await axios.post('https://code-tracker-1-fo9j.onrender.com/api/auth/login', {
-        email,
-        password,
-      });
-      localStorage.setItem('token', res.data.token);
-      localStorage.setItem('userEmail', email); // ✅ Store email for profile display
+      const res = await axios.post(
+        'https://code-tracker-1-fo9j.onrender.com/api/auth/login',
+        { email, password }
+      );
+
+      const token = res.data.token;
+      localStorage.setItem('token', token);
+      localStorage.setItem('userEmail', email);
+
+      // ✅ Decode expiry from JWT
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const expiry = payload.exp * 1000; // seconds → ms
+      localStorage.setItem('tokenExpiry', expiry);
+
+      // ✅ Auto logout timer
+      const timeout = expiry - Date.now();
+      setTimeout(() => {
+        alert('Session expired. Please log in again.');
+        localStorage.removeItem('token');
+        localStorage.removeItem('tokenExpiry');
+        localStorage.removeItem('userEmail');
+        navigate('/login');
+      }, timeout);
+
       navigate('/home');
     } catch (err) {
       console.error('Login failed:', err);
       alert('Invalid credentials');
     }
   };
-
-  // const handleRegister = async () => {
-  //   if (!email || !password) {
-  //     alert('Please enter both email and password');
-  //     return;
-  //   }
-
-  //   try {
-  //     const res = await axios.post('http://localhost:5000/api/auth/register', {
-  //       email,
-  //       password,
-  //     });
-  //     alert('Account created successfully!');
-  //     localStorage.setItem('token', res.data.token);
-  //     localStorage.setItem('userEmail', email); // ✅ Store email for profile display
-  //     navigate('/register');
-  //   } catch (err) {
-  //     console.error('Registration failed:', err);
-  //     alert('Account creation failed. Try a different email.');
-  //   }
-  // };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-800 to-blue-600">
@@ -86,7 +81,6 @@ const LoginPage = () => {
         <button
           type="button"
           onClick={() => navigate('/register')}
-
           className="w-full bg-gray-200 text-blue-800 py-3 rounded-lg hover:bg-gray-300 transition duration-200 font-semibold"
         >
           Create Account
